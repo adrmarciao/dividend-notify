@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ScheduleGraph"
+    app:startDestination="@id/ScheduleFragment">
+    <fragment
+        android:id="@+id/ScheduleFragment"
+        android:name="br.com.adriano.dividend.schedule.view.fragment.ScheduleListFragment"
+        android:label="@string/label_schedule">
+    </fragment>
+</navigation>

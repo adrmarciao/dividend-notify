@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StockGraph"
+    app:startDestination="@id/StockFragment">
+
+    <fragment
+        android:id="@+id/StockFragment"
+        android:name="br.com.adriano.dividend.stock.view.fragment.StockAddFragment"
+        android:label="@string/label_add_stock_watch">
+    </fragment>
+</navigation>

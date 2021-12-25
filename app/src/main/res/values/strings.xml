@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DividendNotify</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="label_home_screen">Tela Principal</string>
+    <string name="label_add_stock_watch">Adicionar Watch</string>
+    <string name="label_schedule">Agenda de Proventos</string>
+
+    <string name="schedule_payment">Pagamento: %1$s</string>
+</resources>

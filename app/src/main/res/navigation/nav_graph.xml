@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeGraph">
+    <action
+        android:id="@+id/nav_to_stock_single"
+        app:destination="@id/StockGraph"
+        app:launchSingleTop="true"
+        />
+    <action
+        android:id="@+id/nav_to_schedule_single"
+        app:destination="@id/ScheduleGraph"
+        app:launchSingleTop="true"
+        />
+    <action
+        android:id="@+id/nav_to_home_single"
+        app:destination="@id/HomeGraph"
+        app:launchSingleTop="true"
+        />
+    <include app:graph="@navigation/stock_graph" />
+    <include app:graph="@navigation/schedule_graph" />
+    <include app:graph="@navigation/home_graph" />
+</navigation>
