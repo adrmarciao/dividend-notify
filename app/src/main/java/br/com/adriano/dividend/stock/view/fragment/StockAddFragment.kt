@@ -9,6 +9,7 @@ import br.com.adriano.dividend.core.view.fragment.BaseFragment
 import br.com.adriano.dividend.databinding.FragmentStockAddBinding
 import br.com.adriano.dividend.stock.view.adapter.StockAdapter
 import br.com.adriano.dividend.stock.view.viewmodel.StockAddViewModel
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StockAddFragment :
@@ -35,6 +36,7 @@ class StockAddFragment :
 
             //save stock
             saveStock.setOnClickListener {
+                Snackbar.make(root, "Salvando...", Snackbar.LENGTH_SHORT).show()
                 stockAddViewModel.save(stockAdapter.stockList)
             }
         }

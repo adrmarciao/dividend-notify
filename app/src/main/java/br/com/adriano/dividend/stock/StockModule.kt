@@ -11,11 +11,11 @@ import org.koin.dsl.module
 val stockModule = module {
 
     //LocalResource
-    factory { StockLocalDataSource(androidContext()) }
+    single  { StockLocalDataSource(androidContext()) }
 
     //Repository
-    factory<StockRepository> { StockRepositoryImpl(get()) }
+    single <StockRepository> { StockRepositoryImpl(get()) }
 
-    viewModel { StockAddViewModel(get()) }
+    viewModel { StockAddViewModel(get(), get()) }
 
 }

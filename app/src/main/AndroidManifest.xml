@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DividendNotify">
+        <service android:name="br.com.adriano.dividend.core.service.StatusInvestUpdateJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <activity
             android:name="br.com.adriano.dividend.core.view.activity.MainActivity"
             android:exported="true"

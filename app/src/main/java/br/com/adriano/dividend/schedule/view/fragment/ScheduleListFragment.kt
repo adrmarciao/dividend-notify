@@ -47,8 +47,18 @@ class ScheduleListFragment :
         binding?.progress?.isVisible = true
         scheduleListViewModel.requestDataComSchedule()
             .observe(viewLifecycleOwner, {
-                binding?.progress?.isVisible = false
-                adapter.addAll(it)
+                if (it.isNotEmpty()) {
+                    binding?.apply {
+                        holderEmpty.isVisible = false
+                        progress.isVisible = false
+                        adapter.addAll(it)
+                    }
+                } else {
+                    binding?.apply {
+                        holderEmpty.isVisible = true
+                        progress.isVisible = false
+                    }
+                }
             })
     }
 }

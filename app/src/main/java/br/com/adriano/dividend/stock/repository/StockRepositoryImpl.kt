@@ -1,7 +1,6 @@
 package br.com.adriano.dividend.stock.repository
 
 import br.com.adriano.dividend.stock.repository.datasource.StockLocalDataSource
-import br.com.adriano.dividend.schedule.repository.datasource.ScheduleRemoteDataSource
 
 internal class StockRepositoryImpl(
     private val stockLocalDataSource: StockLocalDataSource,
