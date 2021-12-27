@@ -40,8 +40,6 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
                 if ((newList == cacheList).not()) {
                     scheduleRepository.saveProventsResponse(newList)
                     createNotification("Status Invest", "Calendário Atualizado...")
-                } else {
-                    createNotification("Status Invest", "Checando...")
                 }
                 jobFinished(p0, true)
             }
@@ -68,7 +66,6 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
     }
 
     override fun onStopJob(p0: JobParameters?): Boolean {
-//        scheduleJob(this, ComponentName(this, StatusInvestUpdateJobService::class.java))
         return true
     }
 
