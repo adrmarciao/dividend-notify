@@ -1,6 +1,7 @@
 package br.com.adriano.dividend.core.application
 
 import android.app.Application
+import br.com.adriano.dividend.price.priceModule
 import br.com.adriano.dividend.schedule.scheduleModule
 import br.com.adriano.dividend.stock.stockModule
 import br.com.adriano.statusinvest.networkModule
@@ -16,7 +17,8 @@ class DividendApplication : Application() {
             modules(
                 networkModule,
                 stockModule,
-                scheduleModule
+                scheduleModule,
+                priceModule
             )
         }
     }

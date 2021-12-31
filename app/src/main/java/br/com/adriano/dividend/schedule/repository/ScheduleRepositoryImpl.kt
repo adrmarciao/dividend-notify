@@ -27,6 +27,10 @@ internal class ScheduleRepositoryImpl(
         return coroutineScope {
             val proventList = mutableListOf<ProventResponse>()
             val dateTime = LocalDateTime.now()
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0)
             val deferred = listOf(     //
                 async { requestEvents("Acoes", dateTime, proventList) },
                 async { requestEvents("FundosImobiliarios", dateTime, proventList) },

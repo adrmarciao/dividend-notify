@@ -8,6 +8,7 @@ import android.app.job.JobService
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import br.com.adriano.dividend.R
@@ -74,6 +75,7 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
             val jobScheduler =
                 context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
             if (jobScheduler.getPendingJob(123) == null) {
+                Log.i("teste", "testeeeeeeeeeeeeeeeee")
                 val jobInfo =
                     JobInfo.Builder(123, componentName)
                 val job = jobInfo.setRequiresCharging(false)

@@ -18,6 +18,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::clas
             scheduleStock.setOnClickListener {
                 mainNavController()?.navigate(R.id.nav_to_schedule_single)
             }
+
+            fairPrice.setOnClickListener {
+                mainNavController()?.navigate(R.id.nav_to_fair_price_single)
+            }
         }
     }
 }

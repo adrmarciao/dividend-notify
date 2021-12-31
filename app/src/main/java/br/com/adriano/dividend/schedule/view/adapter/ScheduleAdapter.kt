@@ -50,7 +50,7 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterView
             scheduleList.addAll(list
                 .asSequence()
                 .filter { it.dateCom == date }
-                .map { ScheduleItem(it.code, it.companyName, it.companyId, it.paymentDividend) }
+                .map { ScheduleItem(it.code, it.companyName, it.companyId, it.paymentDividend, it.resultAbsoluteValue) }
             )
         }
         notifyItemRangeChanged(0, scheduleList.size)
@@ -76,12 +76,15 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterView
             if (item is ScheduleItem) {
                 Glide
                     .with(itemView)
-                    .load("https://statusinvest.com.br/img/company/avatar/${item.companyId}.jpg")
+                    .load("https://statusinvest.com.br" +
+                            "/img/company/avatar/${item.companyId}.jpg")
                     .into(binding.itemStockImage)
                 binding.itemStock.text = item.code
                 binding.itemStockName.text = item.companyName
                 val payment = item.paymentDateTime
                     ?.run { format(ApplicationDateFormat.BRAZIL_SIMPLE_DATE_FORMATTER) } ?: ""
+                binding.itemStockPaymentValue.text = itemView
+                    .resources.getString(R.string.schedule_payment_value, item.paymentValue)
                 binding.itemStockPayment.text = itemView
                     .resources.getString(R.string.schedule_payment, payment)
             }
@@ -92,7 +95,8 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterView
         val code: String,
         val companyName: String,
         val companyId: Long,
-        val paymentDateTime: LocalDateTime?
+        val paymentDateTime: LocalDateTime?,
+        val paymentValue: String?
     )
 
     data class ScheduleDate(

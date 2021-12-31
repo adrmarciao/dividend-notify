@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/FairPriceNav"
+    app:startDestination="@id/FairPriceFragment">
+    <fragment
+        android:id="@+id/FairPriceFragment"
+        android:name="br.com.adriano.dividend.price.view.fragment.FairPriceFragment"
+        android:label="@string/label_schedule">
+    </fragment>
+</navigation>
