@@ -1,17 +1,17 @@
 package br.com.adriano.dividend.schedule.repository.datasource
 
 import br.com.adriano.statusinvest.api.StatusInvestResource
-import br.com.adriano.statusinvest.data.response.Events
-import br.com.adriano.statusinvest.data.response.Result
+import br.com.adriano.statusinvest.data.response.EventsResponse
+import br.com.adriano.statusinvest.data.response.NetworkResult
 import java.lang.Exception
 
 internal class ScheduleRemoteDataSource(private val statusInvestResource: StatusInvestResource) {
 
-    suspend fun getEvents(year: Int, month: Int, type: String): Result<Events> {
+    suspend fun getEvents(year: Int, month: Int, type: String): NetworkResult<EventsResponse> {
         return try {
-            Result.Success(statusInvestResource.getEvents(year, month, type).body()!!)
+            NetworkResult.Success(statusInvestResource.getEvents(year, month, type).body()!!)
         } catch (e: Exception) {
-            Result.Error(e)
+            NetworkResult.Error(e)
         }
     }
 }

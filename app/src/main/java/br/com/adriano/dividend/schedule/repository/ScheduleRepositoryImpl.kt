@@ -4,7 +4,7 @@ import br.com.adriano.dividend.core.util.RegexPattern
 import br.com.adriano.dividend.schedule.repository.datasource.ScheduleLocalDataSource
 import br.com.adriano.dividend.schedule.repository.datasource.ScheduleRemoteDataSource
 import br.com.adriano.statusinvest.data.response.ProventResponse
-import br.com.adriano.statusinvest.data.response.Result
+import br.com.adriano.statusinvest.data.response.NetworkResult
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -65,7 +65,7 @@ internal class ScheduleRepositoryImpl(
     ) {
         when (val result =
             getEvents(time.year, time.monthValue, type)) {
-            is Result.Success -> {
+            is NetworkResult.Success -> {
                 provents.addAll(result.data.provents)
             }
         }

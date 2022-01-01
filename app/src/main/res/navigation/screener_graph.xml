@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ScreenerGraph"
+    app:startDestination="@id/SelectScreenerFragment">
+    <fragment
+        android:id="@+id/SelectScreenerFragment"
+        android:name="br.com.adriano.dividend.screener.view.fragment.SelectScreenerFragment"
+        android:label="@string/label_screener_list">
+        <action
+            android:id="@+id/to_screener_result"
+            app:destination="@id/ScreenerResultFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/ScreenerResultFragment"
+        android:name="br.com.adriano.dividend.screener.view.fragment.ScreenerResultFragment"
+        android:label="@string/label_screener_result">
+        <argument
+            android:name="setor"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="subSector"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="segment"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+</navigation>

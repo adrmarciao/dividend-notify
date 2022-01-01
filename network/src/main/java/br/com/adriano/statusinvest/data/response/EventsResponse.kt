@@ -3,7 +3,7 @@ package br.com.adriano.statusinvest.data.response
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
-data class Events(
+data class EventsResponse(
     @SerializedName("loadStalker") val loadStalker: Boolean,
     @SerializedName("type") val type: Int,
     @SerializedName("loaded") val loaded: Boolean,

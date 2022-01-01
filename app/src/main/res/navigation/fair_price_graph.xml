@@ -6,6 +6,10 @@
     <fragment
         android:id="@+id/FairPriceFragment"
         android:name="br.com.adriano.dividend.price.view.fragment.FairPriceFragment"
-        android:label="@string/label_schedule">
+        android:label="@string/label_fair_price">
+        <argument
+            android:name="stock"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 </navigation>

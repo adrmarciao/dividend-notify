@@ -2,9 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ScheduleGraph"
-    app:startDestination="@id/ScheduleFragment">
+    app:startDestination="@id/ScreenerFragment">
     <fragment
-        android:id="@+id/ScheduleFragment"
+        android:id="@+id/ScreenerFragment"
         android:name="br.com.adriano.dividend.schedule.view.fragment.ScheduleListFragment"
         android:label="@string/label_schedule">
     </fragment>

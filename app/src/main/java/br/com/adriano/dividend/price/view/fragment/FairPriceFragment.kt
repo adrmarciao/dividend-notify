@@ -1,6 +1,7 @@
 package br.com.adriano.dividend.price.view.fragment
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import br.com.adriano.dividend.core.view.fragment.BaseFragment
 import br.com.adriano.dividend.databinding.FragmentFairPriceBinding
@@ -14,6 +15,10 @@ class FairPriceFragment : BaseFragment<FragmentFairPriceBinding>(FragmentFairPri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            val args = FairPriceFragmentArgs.fromBundle(it)
+            binding?.edtStock?.text = Editable.Factory.getInstance().newEditable(args.stock)
+        }
         binding?.apply {
             calcFairPrice.setOnClickListener {
                 fairPriceViewModel.calcFairPrice(

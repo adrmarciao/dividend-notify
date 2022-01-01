@@ -22,6 +22,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::clas
             fairPrice.setOnClickListener {
                 mainNavController()?.navigate(R.id.nav_to_fair_price_single)
             }
+
+            screener.setOnClickListener {
+                mainNavController()?.navigate(R.id.nav_to_screener_single)
+            }
         }
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/screener_bancos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bancos" />
+
+    <Button
+        android:id="@+id/screener_financeiros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Financeiros" />
+
+    <Button
+        android:id="@+id/screener_eletricidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eletricidade" />
+
+    <Button
+        android:id="@+id/screener_seguros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seguros" />
+
+    <Button
+        android:id="@+id/screener_saneamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saneamento" />
+
+    <Button
+        android:id="@+id/screener_telecom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telecom" />
+
+</LinearLayout>

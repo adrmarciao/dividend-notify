@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.adriano.dividend.core.view.viewmodel.BaseViewModel
 import br.com.adriano.dividend.price.repository.FairPriceRepository
-import br.com.adriano.statusinvest.data.response.Result
+import br.com.adriano.statusinvest.data.response.NetworkResult
 import kotlinx.coroutines.launch
 
 class FairPriceViewModel(private val fairPriceRepository: FairPriceRepository) : BaseViewModel() {
@@ -14,7 +14,7 @@ class FairPriceViewModel(private val fairPriceRepository: FairPriceRepository) :
     fun calcFairPrice(tick: String, count: Int, startYear: Long) {
         viewModelScope.launch {
             when(val result = fairPriceRepository.requestTickerProvents(tick)) {
-                is Result.Success -> {
+                is NetworkResult.Success -> {
                     val list = result.data.assetEarningsYearlyModels.sortedWith(compareByDescending { it.year })
                     var sum = 0F
                     val value = if (count < list.size) count else list.size
@@ -28,7 +28,7 @@ class FairPriceViewModel(private val fairPriceRepository: FairPriceRepository) :
                     sumText += "= ${((sum / value) / 0.06).toFloat()}"
                     resultValue.postValue(sumText)
                 }
-                is Result.Error -> {
+                is NetworkResult.Error -> {
                     //TODO Implementar fluxo de erro
                 }
             }

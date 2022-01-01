@@ -24,8 +24,18 @@
         app:destination="@id/FairPriceNav"
         app:launchSingleTop="true"
         />
+    <action
+        android:id="@+id/nav_to_screener_single"
+        app:destination="@id/ScreenerGraph"
+        app:launchSingleTop="true"
+        />
+    <action
+        android:id="@+id/nav_to_fair_price"
+        app:destination="@id/FairPriceNav"
+        />
     <include app:graph="@navigation/fair_price_graph"/>
     <include app:graph="@navigation/stock_graph" />
     <include app:graph="@navigation/schedule_graph" />
     <include app:graph="@navigation/home_graph" />
+    <include app:graph="@navigation/screener_graph" />
 </navigation>
