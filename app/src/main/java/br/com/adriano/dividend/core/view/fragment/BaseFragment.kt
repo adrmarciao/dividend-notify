@@ -24,6 +24,7 @@ open class BaseFragment<T : ViewBinding>(private val cls: KClass<T>) : Fragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        progressLiveData.postValue(false)
         val method = cls.members.filter { it.name == INFLATE_METHOD_KEY }[1]
         _binding =  method.call(inflater, container, false) as T?
         return _binding!!.root
