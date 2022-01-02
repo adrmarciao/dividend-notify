@@ -7,8 +7,16 @@ import androidx.viewbinding.ViewBinding
 import br.com.adriano.dividend.databinding.ListScreenerItemBinding
 import br.com.adriano.dividend.databinding.ListScreenerTitleBinding
 import br.com.adriano.statusinvest.data.response.AdvancedSearchResponse
+import com.bumptech.glide.Glide
+import androidx.core.content.ContextCompat.startActivity
 
-class ScreenerAdapter(private val onClick: (AdvancedSearchResponse) -> Unit) : RecyclerView.Adapter<ScreenerAdapter.ScreenerViewHolder>() {
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat
+
+
+class ScreenerAdapter(private val onClick: (AdvancedSearchResponse) -> Unit,
+                      private val statusClick: (AdvancedSearchResponse) -> Unit) : RecyclerView.Adapter<ScreenerAdapter.ScreenerViewHolder>() {
 
     private val list = mutableListOf<Any>()
 
@@ -36,11 +44,21 @@ class ScreenerAdapter(private val onClick: (AdvancedSearchResponse) -> Unit) : R
         if (holder is ScreenerTitleViewHolder) {
             holder.biding.screenerTitle.text = list[position] as String
         } else if (holder is ScreenerItemViewHolder) {
-            holder.biding.screenerItem.text = (list[position] as AdvancedSearchResponse).run {
+            (list[position] as AdvancedSearchResponse).run {
                 holder.itemView.setOnClickListener {
                     onClick.invoke(this)
                 }
-                return@run "$ticker - $companyName"
+                holder.biding.itemScreenerTick.text = ticker
+                holder.biding.itemScreenerName.text = companyName
+                holder.biding.itemScreenerValue.text = "R$: $price"
+                holder.biding.itemScreenerDirectStatusInvest.setOnClickListener {
+                    statusClick.invoke(this)
+                }
+                Glide
+                    .with(holder.biding.itemScreenerImage.context)
+                    .load("https://statusinvest.com.br" +
+                            "/img/company/avatar/${companyId}.jpg")
+                    .into(holder.biding.itemScreenerImage)
             }
         }
     }

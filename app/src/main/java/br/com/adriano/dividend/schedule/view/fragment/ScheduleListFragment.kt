@@ -3,11 +3,13 @@ package br.com.adriano.dividend.schedule.view.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import br.com.adriano.dividend.core.application.DividendApplication
 import br.com.adriano.dividend.core.view.fragment.BaseFragment
 import br.com.adriano.dividend.databinding.FragmentScheduleListBinding
 import br.com.adriano.dividend.schedule.view.adapter.ScheduleAdapter
 import br.com.adriano.dividend.schedule.view.viewmodel.ScheduleListViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleListFragment :
@@ -32,7 +34,7 @@ class ScheduleListFragment :
     private fun setupObservers() {
         scheduleListViewModel.failure.observe(viewLifecycleOwner, {
             binding?.apply {
-                progress.isVisible = false
+                progressLiveData.postValue(false)
                 root.let { it1 ->
                         Snackbar.make(it1, "Falha de conexão!", Snackbar.LENGTH_LONG)
                             .setAction("Repetir") {
@@ -44,19 +46,19 @@ class ScheduleListFragment :
     }
 
     private fun requestDataComSchedule() {
-        binding?.progress?.isVisible = true
+        progressLiveData.postValue(true)
         scheduleListViewModel.requestDataComSchedule()
             .observe(viewLifecycleOwner, {
                 if (it.isNotEmpty()) {
                     binding?.apply {
                         holderEmpty.isVisible = false
-                        progress.isVisible = false
+                        progressLiveData.postValue(false)
                         adapter.addAll(it)
                     }
                 } else {
                     binding?.apply {
                         holderEmpty.isVisible = true
-                        progress.isVisible = false
+                        progressLiveData.postValue(false)
                     }
                 }
             })

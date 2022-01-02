@@ -40,14 +40,14 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
                 val newList = scheduleRepository.requestSchedule(stockList)
                 if ((newList == cacheList).not()) {
                     scheduleRepository.saveProventsResponse(newList)
-                    createNotification("Status Invest", "Calendário Atualizado...")
+                    createNotification()
                 }
                 jobFinished(p0, true)
             }
         return true
     }
 
-    private fun createNotification(title: String, message: String) {
+    private fun createNotification() {
         with(NotificationManagerCompat.from(applicationContext)) {
             val intent = Intent(applicationContext, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -56,9 +56,9 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
                 PendingIntent.getActivity(applicationContext, 0, intent, 0)
 
             val builder = NotificationCompat.Builder(applicationContext, "dividend")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle(title)
-                .setContentText(message)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setContentTitle("Status Invest")
+                .setContentText("Calendário Atualizado...")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
@@ -75,14 +75,13 @@ class StatusInvestUpdateJobService : KoinComponent, JobService() {
             val jobScheduler =
                 context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
             if (jobScheduler.getPendingJob(123) == null) {
-                Log.i("teste", "testeeeeeeeeeeeeeeeee")
                 val jobInfo =
                     JobInfo.Builder(123, componentName)
                 val job = jobInfo.setRequiresCharging(false)
                     .setMinimumLatency(TimeUnit.SECONDS.toMillis(1))
                     .setPersisted(true)
                     .setOverrideDeadline(TimeUnit.MINUTES.toMillis(5))
-                    .setBackoffCriteria(TimeUnit.HOURS.toMillis(1), JobInfo.BACKOFF_POLICY_LINEAR)
+                    .setBackoffCriteria(TimeUnit.HOURS.toMillis(8), JobInfo.BACKOFF_POLICY_LINEAR)
                     .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).build()
                 jobScheduler.schedule(job)
             }

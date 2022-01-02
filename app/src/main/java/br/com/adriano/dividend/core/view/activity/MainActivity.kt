@@ -8,16 +8,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.adriano.dividend.R
+import br.com.adriano.dividend.core.application.DividendApplication
 import br.com.adriano.dividend.core.service.StatusInvestUpdateJobService
 import br.com.adriano.dividend.databinding.ActivityMainBinding
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
+    private val progressLive: DividendApplication.ProgressLiveData by inject()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -49,6 +54,10 @@ class MainActivity : AppCompatActivity() {
             this,
             ComponentName(this, StatusInvestUpdateJobService::class.java)
         )
+        progressLive.observe(this, {
+            binding.content.progress.isVisible = it
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
