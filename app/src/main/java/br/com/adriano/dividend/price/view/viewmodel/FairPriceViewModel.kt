@@ -9,13 +9,15 @@ import kotlinx.coroutines.launch
 
 class FairPriceViewModel(private val fairPriceRepository: FairPriceRepository) : BaseViewModel() {
 
-    val resultValue = MutableLiveData<String>()
+    val resultValueLiveData = MutableLiveData<String>()
+    val probabilityLiveData = MutableLiveData<ProfitData>()
 
     fun calcFairPrice(tick: String, count: Int, startYear: Long) {
         viewModelScope.launch {
-            when(val result = fairPriceRepository.requestTickerProvents(tick)) {
+            when (val result = fairPriceRepository.requestTickerProvents(tick)) {
                 is NetworkResult.Success -> {
-                    val list = result.data.assetEarningsYearlyModels.sortedWith(compareByDescending { it.year })
+                    val list =
+                        result.data.assetEarningsYearlyModels.sortedWith(compareByDescending { it.year })
                     var sum = 0F
                     val value = if (count < list.size) count else list.size
                     var sumText = ""
@@ -26,12 +28,41 @@ class FairPriceViewModel(private val fairPriceRepository: FairPriceRepository) :
                         }
                     }
                     sumText += "= ${((sum / value) / 0.06).toFloat()}"
-                    resultValue.postValue(sumText)
+                    resultValueLiveData.postValue(sumText)
                 }
                 is NetworkResult.Error -> {
-                    //TODO Implementar fluxo de erro
+                    _failure.postValue(result.exception)
+                }
+            }
+        }
+        requestPayoutData(tick)
+    }
+
+    private fun requestPayoutData(tick: String) {
+        viewModelScope.launch {
+            when (val result = fairPriceRepository.requestPayout(tick)) {
+                is NetworkResult.Success -> {
+                    var countNegativeEquity = 0
+                    result.data.chart.series.lucroLiquido.forEach {
+                        if (it.value < 0) {
+                            ++countNegativeEquity
+                        }
+                    }
+                    val size = result.data.chart.series.lucroLiquido.size
+                    val probability =
+                        (1 - (countNegativeEquity.toDouble() /
+                                size.toDouble())) * 100
+                    probabilityLiveData.postValue(ProfitData(probability, size))
+                }
+                is NetworkResult.Error -> {
+                    _failure.postValue(result.exception)
                 }
             }
         }
     }
+
+    data class ProfitData(
+        val value: Double,
+        val quantity: Int
+    )
 }

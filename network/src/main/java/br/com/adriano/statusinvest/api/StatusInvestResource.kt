@@ -3,6 +3,7 @@ package br.com.adriano.statusinvest.api
 import br.com.adriano.statusinvest.data.response.AdvancedSearchResponse
 import br.com.adriano.statusinvest.data.response.CompanyProventReponse
 import br.com.adriano.statusinvest.data.response.EventsResponse
+import br.com.adriano.statusinvest.data.response.PayoutResultResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -21,6 +22,12 @@ interface StatusInvestResource {
         @Query("ticker") ticker: String,
         @Query("chartProventsType") type: Int = 2,
     ): Response<CompanyProventReponse>
+
+    @GET("/acao/payoutresult")
+    suspend fun payoutResult(
+        @Query("code") ticker: String,
+        @Query("type") type: Int = 2,
+    ): Response<PayoutResultResponse>
 
     @GET("/category/advancedsearchresult")
     suspend fun advancedSearch(

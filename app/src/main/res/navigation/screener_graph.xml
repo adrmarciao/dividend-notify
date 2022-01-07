@@ -9,8 +9,7 @@
         android:label="@string/label_screener_list">
         <action
             android:id="@+id/to_screener_result"
-            app:destination="@id/ScreenerResultFragment"
-            />
+            app:destination="@id/ScreenerResultFragment"/>
     </fragment>
     <fragment
         android:id="@+id/ScreenerResultFragment"

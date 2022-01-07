@@ -10,4 +10,5 @@
     <string name="label_screener_result">Screener Resultados</string>
     <string name="schedule_payment">Pagamento: %1$s</string>
     <string name="schedule_payment_value">R$: %1$s</string>
+    <string name="fair_price_profit_percent">Probabilidade Lucro: %1$s%%\nAmostras: %2$s</string>
 </resources>

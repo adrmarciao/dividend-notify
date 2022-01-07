@@ -3,10 +3,12 @@ package br.com.adriano.dividend.price.view.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import br.com.adriano.dividend.R
 import br.com.adriano.dividend.core.view.fragment.BaseFragment
 import br.com.adriano.dividend.databinding.FragmentFairPriceBinding
 import br.com.adriano.dividend.price.view.viewmodel.FairPriceViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.math.RoundingMode
 import java.time.LocalDate
 
 class FairPriceFragment : BaseFragment<FragmentFairPriceBinding>(FragmentFairPriceBinding::class) {
@@ -34,8 +36,12 @@ class FairPriceFragment : BaseFragment<FragmentFairPriceBinding>(FragmentFairPri
             }
         }
 
-        fairPriceViewModel.resultValue.observe(viewLifecycleOwner, {
+        fairPriceViewModel.resultValueLiveData.observe(viewLifecycleOwner, {
             binding?.fairPriceResult?.text = it
+        })
+
+        fairPriceViewModel.probabilityLiveData.observe(viewLifecycleOwner, {
+            binding?.probability?.text = getString(R.string.fair_price_profit_percent, it.value.toBigDecimal().setScale(2, RoundingMode.UP).toString(), it.quantity.toString())
         })
     }
 }
